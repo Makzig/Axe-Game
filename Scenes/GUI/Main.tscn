@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://krwmknk5cmqp"]
+
+[ext_resource type="Texture2D" uid="uid://bcssm1tedav3o" path="res://Sprites/Ui/Space UI pack/assets/Button_01.png" id="1_px7uw"]
+[ext_resource type="Texture2D" uid="uid://du7cd3ncwcwy6" path="res://Sprites/Ui/Space UI pack/assets/Button_02.png" id="2_bq5wy"]
+[ext_resource type="Script" path="res://Scenes/Play.gd" id="3_co0dk"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -62.0
+offset_right = 208.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(208, 62)
+alignment = 1
+
+[node name="Play" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_px7uw")
+texture_pressed = ExtResource("2_bq5wy")
+stretch_mode = 0
+script = ExtResource("3_co0dk")

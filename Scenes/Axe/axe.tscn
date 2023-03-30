@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0bi63scybu1i"]
+
+[ext_resource type="Texture2D" uid="uid://c01dkhja73m6l" path="res://Sprites/Axe.png" id="1_7wc25"]
+[ext_resource type="Script" path="res://Scenes/Axe/Axe.gd" id="1_jhv5n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h22ey"]
+radius = 83.2947
+
+[sub_resource type="Animation" id="Animation_pbth4"]
+resource_name = "Attack"
+length = 0.75
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.25, -0.25, 0, 0.25, 0, -0.5, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.7)
+}
+
+[sub_resource type="Animation" id="Animation_pqhm6"]
+resource_name = "False"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, -0.25, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_y2eti"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.25, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, -0.25, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="Animation" id="Animation_575mm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_8clcp"]
+resource_name = "Stuck"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.925025]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dc6ac"]
+_data = {
+"Attack": SubResource("Animation_pbth4"),
+"False": SubResource("Animation_pqhm6"),
+"Idle": SubResource("Animation_y2eti"),
+"RESET": SubResource("Animation_575mm"),
+"Stuck": SubResource("Animation_8clcp")
+}
+
+[node name="Axe" type="Node2D"]
+script = ExtResource("1_jhv5n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_7wc25")
+
+[node name="AttackArea" type="Area2D" parent="Sprite2D" groups=["AxeAttack"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AttackArea"]
+position = Vector2(69, -159)
+shape = SubResource("CircleShape2D_h22ey")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_dc6ac")
+}

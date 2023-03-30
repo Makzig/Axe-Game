@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://db20tkkbd0hg2"]
+
+[ext_resource type="Texture2D" uid="uid://b50elakjtwms5" path="res://Sprites/Log_PNG_Clipart.png" id="1_5q0oe"]
+[ext_resource type="Script" path="res://Scenes/Log/Log.gd" id="1_u1e53"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1miq"]
+size = Vector2(130, 187.5)
+
+[sub_resource type="Animation" id="Animation_gwxa3"]
+resource_name = "Fall"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.25, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_6ei0h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g0xyx"]
+_data = {
+"Fall": SubResource("Animation_gwxa3"),
+"RESET": SubResource("Animation_6ei0h")
+}
+
+[node name="Log" type="Node2D"]
+script = ExtResource("1_u1e53")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = -1.57079
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_5q0oe")
+
+[node name="HurtBox" type="Area2D" parent="Sprite" groups=["Log"]]
+rotation = 1.57079
+scale = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtBox"]
+position = Vector2(-1, -102.25)
+shape = SubResource("RectangleShape2D_n1miq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g0xyx")
+}

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://byml5dcfg6don"]
+
+[ext_resource type="Script" path="res://Scenes/Point/Stopper.gd" id="1_sjidv"]
+[ext_resource type="Texture2D" uid="uid://djnu0fiivhbq3" path="res://icon.svg" id="2_mmgnm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q8i1p"]
+
+[node name="Stopper" type="Area2D" groups=["Stopper"]]
+script = ExtResource("1_sjidv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q8i1p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.772549, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mmgnm")

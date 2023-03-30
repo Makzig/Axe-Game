@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://0cj764c22q82"]
+
+[ext_resource type="Script" path="res://Scenes/Scrolles/Scroller.gd" id="1_h80ea"]
+[ext_resource type="Texture2D" uid="uid://flcwbyi10bj0" path="res://Sprites/Ui/Space UI pack/assets/Bar_layer1.png" id="2_uw3gd"]
+[ext_resource type="Texture2D" uid="uid://bkyvryfpigy7p" path="res://Sprites/Ui/Space UI pack/assets/Bar_layer2.png" id="3_ygbwe"]
+[ext_resource type="PackedScene" uid="uid://byml5dcfg6don" path="res://Scenes/Point/Stopper.tscn" id="4_6gcf6"]
+[ext_resource type="Texture2D" uid="uid://dvi1revk3cxf5" path="res://Sprites/Ui/Space UI pack/assets/Bar_layer3.png" id="4_6jtr7"]
+
+[sub_resource type="Curve2D" id="Curve2D_7tkkj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 288, 68, 0, 0, 0, 0, 288, 68, 0, 0, 0, 0, 496, 67, 0, 0, 0, 0, 496, 67, 0, 0, 0, 0, 288, 68)
+}
+point_count = 5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ec1iv"]
+radius = 30.0666
+
+[node name="Scroller" type="Node2D"]
+script = ExtResource("1_h80ea")
+scroll_speed = 0.9
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(370, 74)
+texture = ExtResource("2_uw3gd")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(452, 74)
+scale = Vector2(1.7, 1)
+texture = ExtResource("3_ygbwe")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_7tkkj")
+
+[node name="Stoppers" type="Node2D" parent="Path2D"]
+
+[node name="Stopper" parent="Path2D/Stoppers" instance=ExtResource("4_6gcf6")]
+position = Vector2(329, 65)
+
+[node name="ScrollPath" type="PathFollow2D" parent="Path2D"]
+position = Vector2(288, 68)
+progress = 763.465
+rotates = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/ScrollPath"]
+position = Vector2(-11, -4)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_6jtr7")
+region_enabled = true
+region_rect = Rect2(9.45229, 6.41608, 68.9401, 72.4161)
+
+[node name="Point" type="Area2D" parent="Path2D/ScrollPath/Sprite2D" groups=["Point"]]
+position = Vector2(-2, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/ScrollPath/Sprite2D/Point"]
+shape = SubResource("CircleShape2D_ec1iv")

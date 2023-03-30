@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://epp683bn8lvb"]
+
+[ext_resource type="PackedScene" uid="uid://c0bi63scybu1i" path="res://Scenes/Axe/axe.tscn" id="1_jf1dw"]
+[ext_resource type="Script" path="res://Scenes/Main/Test.gd" id="1_x8g5w"]
+[ext_resource type="PackedScene" uid="uid://0cj764c22q82" path="res://Scenes/Scrolles/scroller.tscn" id="2_0xo66"]
+[ext_resource type="PackedScene" uid="uid://db20tkkbd0hg2" path="res://Scenes/Log/log.tscn" id="3_lqeic"]
+[ext_resource type="PackedScene" uid="uid://b17oxcw8jwrs5" path="res://Scenes/GUI/Win.tscn" id="5_lumep"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(25, -80)
+script = ExtResource("1_x8g5w")
+
+[node name="Log" parent="." instance=ExtResource("3_lqeic")]
+position = Vector2(388, 747)
+
+[node name="Axe" parent="." instance=ExtResource("1_jf1dw")]
+position = Vector2(163, 570)
+scroller = NodePath("../Scroller")
+
+[node name="Scroller" parent="." instance=ExtResource("2_0xo66")]
+position = Vector2(-38, 169)
+axe_path = NodePath("../Axe")
+
+[node name="NeesPos" type="Marker2D" parent="."]
+position = Vector2(391, 746)
+
+[node name="SpawnPos" type="Marker2D" parent="."]
+position = Vector2(810, 787)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.52549, 0.909804, 0.54902, 1)
+
+[node name="Win" parent="CanvasLayer" instance=ExtResource("5_lumep")]
+offset_left = 2.0
+offset_top = -12.0
+offset_right = 2.0
+offset_bottom = -12.0
