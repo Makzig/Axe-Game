@@ -12,7 +12,7 @@ class_name Scroller
 
 var _axe:Axe
 
-var good_attack:bool = false
+var is_good_attack:bool = false
 
 
 
@@ -43,10 +43,10 @@ func connect_stoppers() -> void:
 
 
 func _on_attack_false() -> void:
-	good_attack = false
+	is_good_attack = false
 
 func _on_attack_good() -> void:
-	good_attack = true
+	is_good_attack = true
 
 func _on_stucked() -> void:
 	set_process_input(false)
