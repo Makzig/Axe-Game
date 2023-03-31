@@ -45,9 +45,8 @@ func _input(event):
 
 func attack() -> void:
 	_state = AxeState.ATTACK
-	
 	_anim_player.play("Attack")
-	
+
 
 
 func check_attack() -> void:
@@ -58,9 +57,12 @@ func check_attack() -> void:
 			_anim_player.play("Stuck")
 			stucked.emit()
 		else:
+			if _anim_player.is_playing():
+				await  _anim_player.animation_finished
 			_anim_player.play_backwards("Attack")
 			await _anim_player.animation_finished
 			_state = AxeState.IDLE
+			_anim_player.play("Idle")
 	else:
 		health -= 1
 		_anim_player.play("False")
@@ -74,6 +76,7 @@ func check_attack() -> void:
 func _on_attack_entered(area) -> void:
 	if area.is_in_group("Log"):
 		check_attack()
+		#pass
 
 func _on_killed() -> void:
 	_state = AxeState.LOSE
